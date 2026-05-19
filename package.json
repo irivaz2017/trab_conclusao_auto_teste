@@ -1,0 +1,24 @@
+{
+  "name": "trab_conclusao_auto_teste",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irivaz2017/trab_conclusao_auto_teste.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/irivaz2017/trab_conclusao_auto_teste/issues"
+  },
+  "homepage": "https://github.com/irivaz2017/trab_conclusao_auto_teste#readme",
+  "dependencies": {
+    "mocha": "^11.7.5"
+  }
+}
