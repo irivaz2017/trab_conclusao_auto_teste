@@ -3,12 +3,12 @@ name: CI - Testes Mocha
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 11 * * *'
-    - cron: '0 17 * * *'
+    - cron: "40 10 * * *"
+      timezone: "America/Sao_Paulo"
+
   push:
     branches:
       - main
-      - master
 
 jobs:
   testes:
