@@ -3,8 +3,8 @@ name: CI - Testes Mocha
 on:
   workflow_dispatch:
   schedule:
-    - cron: "40 10 * * *"
-      timezone: "America/Sao_Paulo"
+    - cron: "35 8 * * *"
+    - cron: "5 9 * * *"
 
   push:
     branches:
