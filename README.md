@@ -1,4 +1,3 @@
-
 # Trabalho de testes automatizados com Mocha
 
 Este projeto implementa a classe `ServicoDePagamento` e utiliza testes automatizados com Mocha para validar o comportamento esperado.
@@ -20,7 +19,7 @@ A configuração utiliza o reporter `mochawesome`, gerando um relatório em HTML
 
 ## Pipeline de integração contínua
 
-O projeto possui uma pipeline configurada no GitHub Actions em [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+O projeto possui uma pipeline configurada no GitHub Actions em [`.github/workflows/ci.yml`].
 
 ### 1. Execução manual
 
@@ -28,16 +27,15 @@ A pipeline pode ser executada manualmente pelo GitHub Actions usando a opção `
 
 ### 2. Execução agendada (`schedule`)
 
-A pipeline também roda automaticamente em dois horários:
+A pipeline também roda automaticamente de 30 em 30min. :
 
-- `0 11 * * *` → 08h00 da manhã, horário de Brasília
-- `0 17 * * *` → 14h00 da tarde, horário de Brasília
+- `*/30 * * * *` → de 30 em 30min., horário de Brasília
 
 > Observação: o cron do GitHub Actions é interpretado em UTC. Por isso, os horários acima foram ajustados para refletirem o fuso horário de Brasília.
 
 ### 3. Execução por push
 
-A pipeline é disparada automaticamente ao fazer `push` nas branches `main` e `master`.
+A pipeline é disparada automaticamente ao fazer `push` na branche `main`.
 
 ## Relatório gerado pela pipeline
 
@@ -47,13 +45,13 @@ Durante a execução, a pipeline:
 - gera relatórios em HTML e JSON com `mochawesome`;
 - publica a pasta `reports/` como artefato do workflow para download.
 
-## Exemplo de uso da classe
+## Exemplo de uso da classe do teste UNITARIO
 
 ```javascript
-import ServicoDePagamento from './src/servicoDePagamento.js';
+import ServicoDePagamento from "./src/servicoDePagamento.js";
 
 const servicoDePagamento = new ServicoDePagamento();
-servicoDePagamento.realizarPagamento('0987-7656-3475', 'Samar', 156.87);
+servicoDePagamento.realizarPagamento("0987-7656-3475", "Samar", 156.87);
 console.log(servicoDePagamento.consultarUltimoPagamento());
 ```
 
