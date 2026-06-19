@@ -1,0 +1,53 @@
+name: CI - Testes Mocha
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * *'
+    - cron: '0 17 * * *'
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar testes
+        run: npm test
+
+      - name: Gerar relatório
+        if: always()
+        run: |
+          mkdir -p reports
+          npm run test:report
+
+      - name: Adicionar resumo ao log
+        if: always()
+        run: |
+          echo "## Relatório dos testes" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Relatório HTML: reports/mochawesome.html" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Relatório JSON: reports/mochawesome.json" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publicar relatório como artefato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mocha-report
+          path: reports/
+          if-no-files-found: error
