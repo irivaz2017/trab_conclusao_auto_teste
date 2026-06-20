@@ -3,7 +3,7 @@ name: CI - Testes Mocha
 on:
   workflow_dispatch:
   schedule:
-    # Agendado para rodar de 30 em 30 min.
+    # Agendado para rodar de 10 em 10 min.
     - cron: "*/10 * * * *"
 
   push:
