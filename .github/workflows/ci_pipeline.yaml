@@ -1,23 +1,37 @@
 name: CI - Testes Mocha
 
+# ***********************************************8
+#GATILHOS DE ACIONAMENTO
+# ***********************************************
+
+#Gatilho de execucao
 on:
+  # Permite que o workflow seja acionado manualmente a partir da interface do GitHub Actions.
   workflow_dispatch:
+    #Gatilho de agendamento baseado em expressoes Cron do Unix do GitHub Actions. Neste caso, o workflow é configurado para rodar a cada 10 minutos.
   schedule:
     # Agendado para rodar de 10 em 10 min.
     - cron: "*/10 * * * *"
 
+    # Gatilho de push para a branch main, garantindo que os testes sejam executados sempre que houver alterações na branch principal do repositório.
   push:
     branches:
       - main
 
 jobs:
   testes:
+    # O trabalho é configurado para rodar em um ambiente Ubuntu, utilizando a imagem mais recente disponível no GitHub Actions.
     runs-on: ubuntu-latest
 
     steps:
+      #*********************************************
+      # FAZE INICIAL E AMBIENTE DE CONFIGURAÇÃO
+      #*********************************************
+      # O primeiro passo é fazer o checkout do código-fonte do repositório, garantindo que o workflow tenha acesso ao código necessário para executar os testes.
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
+        # # Instala o ambiente do Node.js na versão estável do projeto
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
@@ -29,7 +43,7 @@ jobs:
 
       - name: Executar testes
         run: npm test
-
+      # Gerar o relatório dos testes usando o comando npm run test:report, que deve estar configurado no package.json para gerar um relatório de teste, como um relatório HTML ou JSON, usando uma ferramenta como Mochawesome.
       - name: Gerar relatório
         if: always()
         run: |
@@ -45,6 +59,7 @@ jobs:
           echo "- Relatório JSON: reports/mochawesome.json" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Publicar relatório como artefato
+        #
         if: always()
         uses: actions/upload-artifact@v4
         with:

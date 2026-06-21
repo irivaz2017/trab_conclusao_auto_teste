@@ -27,9 +27,9 @@ A pipeline pode ser executada manualmente pelo GitHub Actions usando a opção `
 
 ### 2. Execução agendada (`schedule`)
 
-A pipeline também roda automaticamente de 30 em 30min. :
+A pipeline também roda automaticamente de 10 em 10min. :
 
-- `*/30 * * * *` → de 30 em 30min., horário de Brasília
+- `*/10 * * * *` → de 10 em 10min., horário de Brasília
 
 > Observação: o cron do GitHub Actions é interpretado em UTC. Por isso, os horários acima foram ajustados para refletirem o fuso horário de Brasília.
 
